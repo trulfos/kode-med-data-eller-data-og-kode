@@ -47,6 +47,7 @@ pre {
     height: 82vh;
     background: white;
     position: relative;
+    overflow: hidden;
     box-shadow: 0 0 5vh 0 #000000;
     font-size: 0.9em;
 }
@@ -63,12 +64,12 @@ pre {
 }
 
 /* Title slides */
-section.title > h1,
-section.title > p {
+.slideshow > section.title > h1,
+.slideshow > section.title > p {
     color: white;
 }
 
-section.title {
+.slideshow > section.title {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -79,7 +80,7 @@ section.title {
     background-position: center;
 }
 
-section.title::before {
+.slideshow > section.title::before {
     content: '';
     background: url('images/itera.svg');
     background-size: contain;
@@ -90,16 +91,16 @@ section.title::before {
     bottom: 4vh;
 }
 
-section.title.postits {
+.slideshow > section.title.postits {
     background-image: url('images/postits.jpg');
 }
 
 /* Final slide */
-section.final {
+.slideshow > section.final {
     background-image: url('images/final.jpg');
 }
 
-section.final::before {
+.slideshow > section.final::before {
     background-image: url('images/itera.svg');
     width: 72vh;
     height: 40vh;
@@ -107,14 +108,14 @@ section.final::before {
 }
 
 /* Mid-titles */
-section.mid-title {
+.slideshow > section.mid-title {
     padding-top: 30vh;
     padding-left: 45vw;
     height: 66vh;
     overflow: hidden;
 }
 
-section.mid-title::before {
+.slideshow > section.mid-title::before {
     content: '';
     background-image: url('images/archive.jpg');
     background-size: cover;
@@ -126,15 +127,15 @@ section.mid-title::before {
     width: 40vw;
 }
 
-section.mid-title h1 {
+.slideshow > section.mid-title h1 {
     color: inherit;
 }
 
-section.mid-title.wall::before {
+.slideshow > section.mid-title.wall::before {
     background-image: url('images/wall.jpg');
 }
 
-section.mid-title.tree::before {
+.slideshow > section.mid-title.tree::before {
     background-image: url('images/tree.jpg');
 }
 
