@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background: white;
+    background: #333333;;
     color: #414042;
     font-size: 3.5vh;
     font-family: Arial, sans-serif;
@@ -40,13 +40,25 @@ pre {
     font-size: 0.8em;
 }
 
+.slideshow > section {
+    padding: 4vh;
+    margin: 5vh;
+    height: 82vh;
+    background: white;
+    position: relative;
+    box-shadow: 0 0 5vh 0 #000000;
+    font-size: 0.9em;
+}
+
+/* Special handling for javascript (and non-javascript) support */
 .slideshow.with-javascript > section:not(.visible) {
     display: none;
 }
 
-.slideshow > section {
-    padding: 4vh;
+.slideshow.with-javascript > section {
     height: 92vh;
+    margin: 0;
+    font-size: 1em;
 }
 
 /* Title slides */
