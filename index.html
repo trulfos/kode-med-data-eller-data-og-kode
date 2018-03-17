@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kode med data eller data og kode?</title>
+        <link rel="stylesheet" href="prism/prism.css">
+        <script src="prism/prism.js"></script>
+        <script src="index.js"></script>
+        <script src="http://localhost:35729/livereload.js?snipver=1"></script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body class="slideshow fullscreenable" data-n-slides="2">
+
+        <section class="title" id="tittel">
+            <h1>Kode med data eller data og kode?</h1>
+            <p>Ikke fortvil, vi kan kode oss ut av det meste</p>
+        </section>
+
+        <section id="intro">
+            <h1>Data i kode</h1>
+            <p>Et åpenbart tilfelle:</p>
+<pre><code class="language-javascript">const prices = {
+    'sony-vaio-pro-11': 10999,
+    'sony-vaio-pro-13': 11999,
+    'sony-vaio-duo-12': 7000,
+    'macbook-pro': 100000,
+    'dell-latitude-123': 12322,
+    /*[...]*/
+};
+
+function getPrice(model) {
+    return prices[model];
+}</code></pre>
+        </section>
+
+        <section class="mid-title" id="intro-title">
+            <h1>Hvor går grensen?</h1>
+        </section>
+
+        <section id="luresporsmaal">
+            <h1>Lurespørsmål!</h1>
+            <ul>
+                <li>Kode er data</li>
+                <li>Det finnes ingen grense</li>
+                <li>BRUK DET!</li>
+            </ul>
+        </section>
+
+        <section class="mid-title" id="intro-title">
+            <h1>Eksempel</h1>
+        </section>
+
+        <section id="motivasjon">
+            <h1>Motivasjon</h1>
+<pre><code class="language-jsx">const InsuranceForm = () =&gt; (
+    &lt;SuperForm id="order-form"&gt;
+        &lt;h1&gt;Bestill forsikring&lt;/h1&gt;;
+
+        &lt;label for="name"&gt;Navn&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" /&gt;
+
+        &lt;label for="phone"&gt;Telefonnummer&lt;/label&gt;
+        &lt;input type="tel" id="phone" name="phone" /&gt;
+
+        &lt;label for="object"&gt;Forsikringsobjekt&lt;/label&gt;
+        &lt;input type="text" id="object" name="object" /&gt;
+    &lt;/SuperForm&gt;
+);</code></pre>
+        </section>
+
+        <section id="mer-motivasjon">
+            <h1>Mer motivasjon</h1>
+<pre><code class="language-jsx">const ClaimForm = () =&gt; (
+    &lt;BadForm id="claim-form"&gt;
+        &lt;h1&gt;Meld skade&lt;/h1&gt;
+
+        &lt;label for="object"&gt;Forsikringsobjekt&lt;/label&gt;
+        &lt;input type="text" id="object" name="object" /&gt;
+
+        &lt;label for="what"&gt;Hva skjedde?&lt;/label&gt;
+        &lt;input type="text" id="what" name="what" /&gt;
+
+        &lt;label for="why"&gt;Hvorfor skjedde det?&lt;/label&gt;
+        &lt;input type="text" id="why" name="why" /&gt;
+    &lt;/BadForm&gt;
+);</code></pre>
+        </section>
+
+        <section id="enda-mer-motivasjon">
+            <h1>Enda mer motivasjon</h1>
+<pre><code class="language-jsx">const CreditCardInsuranceForm = () =&gt; (
+    &lt;MediocreForm id="order-card-insurance-form"&gt;
+        &lt;h1&gt;Bestill kredittkortforsikring&lt;/h1&gt;;
+
+        &lt;label for="name"&gt;Kortholders navn&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" /&gt;
+
+        &lt;label for="card_number"&gt;Kortnummer&lt;/label&gt;
+        &lt;input type="text" id="card_number" name="card_number" /&gt;
+
+        &lt;label for="expiry"&gt;Utløpsdato&lt;/label&gt;
+        &lt;input type="text" id="expiry" name="expiry" /&gt;
+    &lt;/MediocreForm&gt;
+);</code></pre>
+        </section>
+
+        <section id="mest-motivasjon">
+            <h1>Mest motivasjon</h1>
+<pre><code class="language-jsx">const InsuranceInsuranceForm = () =&gt; (
+    &lt;OldForm id="order-insurance-insurance"&gt;
+        &lt;h1&gt;Bestill forsikringforsikring&lt;/h1&gt;;
+
+        &lt;label for="name"&gt;Forsikringens forsikringsselskap&lt;/label&gt;
+        &lt;input type="text" id="name" name="name" /&gt;
+
+        &lt;label for="amount"&gt;Forsikringsbeløp&lt;/label&gt;
+        &lt;input type="number" id="amount" name="amount" /&gt;
+    &lt;/OldForm&gt;
+);</code></pre>
+        </section>
+
+        <section id="maal">
+            <h1>En generisk løsning</h1>
+            <p>La datamaskinen skrive om koden:</p>
+<pre><code class="language-jsx">const createForm = id =&gt; {
+    const form = db.getForm(id);
+    const FormComponent = form.getFormComponent();
+    return () =&gt; (
+        &lt;FormComponent id={id}&gt;{renderChildren(form)}&lt;/FormComponent&gt;
+    );
+};</code></pre>
+            <p class="important-message">
+                Men nå må vi jo skrive om alle skjemaene?
+            </p>
+        </section>
+
+        <section class="mid-title" id="losning-title">
+            <h1>Esprima</h1>
+            <p>To the rescue</p>
+        </section>
+
+        <section id="hva-er-esprima">
+            <h1>Hva er Esprima?</h1>
+            <div class="missing-image">Pen logo</div>
+            <!-- Som man kan forvente av enhver seriøs parser, er det ingen som
+                har brukt tid på logo... (rolling eyes) -->
+            <ul>
+                <li>Parser for og i Javascript</li>
+                <!-- og lexer om noen lurer -->
+                <li>Støtte for JSX og nyere ES</li>
+                <li>Superenkelt API</li>
+            </ul>
+        </section>
+
+        <section id="esprima-api">
+            <h1>Esprimas API</h1>
+            <ul>
+                <li>Parse et script:<br>
+                    <code class="language-js">
+                        esprima.parseScript(string, [[options], callback]);
+                    </code>
+                </li>
+                <li>Tokenize:<br>
+                    <code class="language-js">
+                        esprima.tokenize(string, [[options], callback]);
+                    </code>
+                </li>
+            </ul>
+        </section>
+
+        <section id="esprima-api-resultat">
+            <h1>Hva får vi tilbake?</h1>
+            <code class="language-js">
+                esprima.parseScript('const a = 2;');
+            </code>
+<pre class="large-example"><code class="language-js">{
+  "type": "Program",
+  "body": [{
+    "type": "VariableDeclaration",
+    "declarations": [
+      {
+        "type": "VariableDeclarator",
+        "id": {"type": "Identifier", "name": "a"},
+        "init": {"type": "Literal", "value": 2, "raw": "2"}
+      }
+    ],
+    "kind": "const"
+  }],
+  "sourceType": "script"
+}</pre></code>
+        </section>
+
+        <section id="esprima-api-resultat-tre">
+            <h1>Et ESTree! 😉</h1>
+            <img
+                src="images/simpletree.svg"
+                alt="Tree fra fra forrige eksempel."
+                class="main-illustration"
+            >
+        </section>
+
+        <section id="kode">
+            <h1>Kode</h1>
+<pre><code class="language-js"><!--
+-->const esprima = require('esprima');
+const fs = require('fs');
+const program = fs.readFileSync('example.js', {encoding: 'utf-8'});
+const data = [];
+
+const tree = esprima.parseScript(
+    program,
+    {jsx: true},
+    visitor
+);
+
+console.log(
+    JSON.stringify(data, null, '    ')
+);</pre></code>
+        </section>
+
+        <section id="kode-visitor">
+            <h1>Kode - <code>visitor</code></h1>
+<pre><code class="language-js"><!--
+-->function visitor(node) {
+    if (!isForm(node)) {
+        return;
+    }
+
+    data.push(
+        extractForm(node)
+    );
+}</pre></code>
+        </section>
+
+        <section id="kode-extract-form">
+            <h1>Kode - <code>extractForm</code></h1>
+<pre><code class="language-js"><!--
+-->function extractForm(node) {
+    return {
+        id: getAttributes(node).id,
+        componentType: getComponentType(node),
+        inputs: extractInputs(node.children)
+    };
+}</pre></code>
+        </section>
+
+        <section id="kode-get-attributes">
+            <h1>Kode - <code>getAttributes</code></h1>
+<pre><code class="language-js"><!--
+-->function getAttributes(node) {
+    return node
+        .openingElement
+        .attributes
+        .reduce(
+            (attrs, attr) =&gt; ({
+                ...attrs,
+                [attr.name.name]: attr.value.value
+            }),
+            {}
+        );
+}</pre></code>
+        </section>
+
+        <section id="kode-extract-inputs">
+            <h1>Kode - <code>extractInputs</code></h1>
+<pre><code class="language-js"><!--
+-->function extractInputs(children) {
+   return children
+    .filter(isInput)
+    .map(getAttributes)
+    .map(attrs =&gt; ({
+        ...attrs,
+        label: getLabel(children, attrs.id)
+    }));
+}</pre></code>
+        </section>
+
+        <section id="kode-get-label">
+            <h1>Kode - <code>getLabel</code></h1>
+<pre><code class="language-js"><!--
+-->function getLabel(children, id){
+    return children
+        .filter(isJsxElement)
+        .find(child =&gt; getAttributes(child).for === id)
+        .children[0]
+        .value;
+}</pre></code>
+        </section>
+
+        <section id="kode-helpers">
+            <h1>Kode - hjelpemetoder</h1>
+<pre><code class="language-js"><!--
+-->function isJsxElement(node) {
+    return node.type === 'JSXElement';
+}
+
+function getComponentType(node) {
+   return node.openingElement.name.name;
+}
+
+function isForm(node) {
+    return isJsxElement(node) &amp;&amp; getComponentType(node).match(/Form$/);
+}
+
+function isInput(node) {
+   return isJsxElement(node) &amp;&amp; getComponentType(node) === 'input';
+}</pre></code>
+        </section>
+
+        <section id="resultat">
+            <h1>Resultat</h1>
+<pre><code class="language-js"><!--
+-->[
+    {
+        "id": "order-form",
+        "componentType": "SuperForm",
+        "inputs": [
+            {
+                "type": "text",
+                "id": "name",
+                "name": "name",
+                "label": "Navn"
+            },
+            /*[...]*/
+        ]
+    },
+    /*[...]*/
+]</pre></code>
+        </section>
+
+        <section id="oppsummering">
+            <h1>Oppsummering (for gullfisker)</h1>
+            <ul>
+                <li>Kode er data - behandles deretter</li>
+                <li>Esprima kan hjelpe for Javascript</li>
+                <li>Koden trenger ikke være perfekt</li>
+                <li>Refaktorer</li>
+            </ul>
+        </section>
+
+        <section class="title postits" id="sporsmaal">
+            <h1>Spørsmål?</h1>
+        </section>
+    </body>
+</html>

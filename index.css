@@ -1,0 +1,133 @@
+html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: white;
+    color: #414042;
+    font-size: 3.5vh;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    color: #D7090C;
+    text-transform: uppercase;
+}
+
+h1 code {
+    text-transform: none;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+li {
+    margin: 1em 0;
+}
+
+.slideshow.with-javascript > section:not(.visible) {
+    display: none;
+}
+
+.slideshow > section {
+    padding: 4vh;
+    height: 92vh;
+}
+
+section.title > h1,
+section.title > p {
+    color: white;
+}
+
+section.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('images/dataincode.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+section.title::before {
+    content: '';
+    background: url('images/itera.svg');
+    background-size: contain;
+    width: 27vh;
+    height: 15vh;
+    position: absolute;
+    left: 4vh;
+    bottom: 4vh;
+}
+
+section.title.postits {
+    background-image: url('images/postits.jpg');
+}
+
+section.mid-title {
+    padding-top: 30vh;
+    padding-left: 45vw;
+    height: 66vh;
+    overflow: hidden;
+}
+
+section.mid-title h1 {
+    color: inherit;
+}
+
+.slideshow > .mid-title::before {
+    content: '';
+    background-image: url('images/archive.jpg');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 40vw;
+}
+
+.slideshow .logo {
+    position: absolute;
+    left: 0.5em;
+    bottom: 0.5em;
+    width: 15vw;
+}
+
+.important-message {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1em 0;
+}
+
+.missing-image {
+    float: right;
+    text-align: center;
+    border: 0.2em solid #414042;
+    padding: 20vh 1em;
+    width: 40vh;
+    margin-right: 2em;
+}
+
+.large-example {
+	font-size: 0.6em;
+}
+
+img.main-illustration {
+    height: 60vh;
+    display: block;
+    margin: 0 auto;
+    display: block;
+}
+
+pre {
+    font-size: 0.8em;
+}
