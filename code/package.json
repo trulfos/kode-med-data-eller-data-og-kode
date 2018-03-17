@@ -1,0 +1,15 @@
+{
+  "name": "esprima-intro-demo",
+  "version": "1.0.0",
+  "description": "Demo for extracting data from code using Esprima",
+  "main": "index.js",
+  "scripts": {
+    "demo": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Truls Rustad Fossum",
+  "license": "ISC",
+  "dependencies": {
+    "esprima": "^4.0.0"
+  }
+}
