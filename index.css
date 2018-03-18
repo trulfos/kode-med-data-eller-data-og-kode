@@ -52,6 +52,17 @@ pre {
     transform: scale(0.9);
 }
 
+.slideshow.with-javascript:not(:fullscreen)::after {
+    content: 'Trykk [ f ] for fullskjerm - naviger med piltaster, space eller hjul';
+    color: white;
+    position: absolute;
+    top: 0.5em;
+    text-align: center;
+    width: 100%;
+    font-size: 0.5em;
+    opacity: 0.5;
+}
+
 /* Special handling for javascript (and non-javascript) support */
 @keyframes slidein {
     from {
