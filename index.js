@@ -73,6 +73,10 @@ class Slideshow {
     }
 
     handleWheelEvent(event) {
+        if (document.fullscreenElement !== this.node) {
+            return;
+        }
+
         if (event.deltaY > 0) {
             this.next();
         } else {
