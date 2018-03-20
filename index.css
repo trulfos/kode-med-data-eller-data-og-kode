@@ -52,7 +52,8 @@ pre {
     transform: scale(0.9);
 }
 
-.slideshow.with-javascript:not(:fullscreen)::after {
+.slideshow.with-javascript:not(.fullscreen)::after
+{
     content: 'Trykk [ f ] for fullskjerm - naviger med piltaster, space eller hjul';
     color: white;
     position: absolute;
@@ -76,11 +77,11 @@ pre {
     }
 }
 
-.slideshow:fullscreen > section:not(.visible) {
+.slideshow.fullscreen > section:not(.visible) {
     display: none;
 }
 
-.slideshow:fullscreen > section {
+.slideshow.fullscreen > section {
     font-size: 1em;
     transform: none;
     animation-duration: 0.3s;
@@ -88,7 +89,7 @@ pre {
     animation-name: slidein;
 }
 
-.slideshow:fullscreen {
+.slideshow.fullscreen {
     overflow: hidden;
 }
 

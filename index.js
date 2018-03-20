@@ -6,13 +6,30 @@ function find(array, condition) {
     }
 }
 
+function isFullscreen() {
+    return document.fullscreen || document.webkitIsFullScreen;
+}
+
 /**
  * Allows a component to set to fullscreen.
  */
 class Fullscreenable {
     constructor(node) {
         this.node = node;
+
         node.addEventListener('keyup', this.handleKeyEvent.bind(this));
+
+        const fullscreenHandler = this.syncFullscreenClass.bind(this);
+        document.addEventListener('webkitfullscreenchange', fullscreenHandler);
+        document.addEventListener('fullscreenchange', fullscreenHandler);
+    }
+
+    syncFullscreenClass(event) {
+        if (isFullscreen())
+            // We are using a class because :fullscreen is buggy in chrome
+            this.node.classList.add('fullscreen');
+        else
+            this.node.classList.remove('fullscreen');
     }
 
     handleKeyEvent(event) {
@@ -22,10 +39,12 @@ class Fullscreenable {
     }
 
     toggleFullscreen() {
-        if (document.fullscreenElement === this.node)
-            document.exitFullscreen();
-        else
-            this.node.requestFullscreen();
+        this.enterFullscreen();
+    }
+
+    enterFullscreen() {
+        const {node} = this;
+        (node.requestFullscreen || node.webkitRequestFullscreen).call(node);
     }
 }
 Fullscreenable.selector = '.fullscreenable';
@@ -118,8 +137,6 @@ class Slideshow {
     }
 }
 Slideshow.selector = '.slideshow';
-
-console.log('hei');
 
 function mountComponent(node, Component) {
     const nodes = node.querySelectorAll(Component.selector);
